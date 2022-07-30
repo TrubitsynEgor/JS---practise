@@ -11,7 +11,7 @@ function filterRange(arr, a, b) {
 } //todo|Методом SLICE
 
 let filtered = filterRange(arr, 1, 4);
-console.log(filtered); // (3) [3, 8, 1] // Найдены элементы между a и b и отдан массив этих элементов
+console.log(filtered); // (3) [3, 8, 1] // Найдены элементы между a и b (length) и отдан массив этих элементов
 console.log(arr); // (4) [5, 3, 8, 1] Исходный массив не изменен
 
 //?==================================================================>
@@ -23,3 +23,27 @@ let filteredTwo = filterRangeTwo(arr, 1, 4);
 
 console.log(filteredTwo);// (2) [3, 1] (совпадающие значения)
 console.log(arr);// (4) [5, 3, 8, 1] Исходный массив не изменен
+
+//?==================================================================>
+
+//? Фильтрация по диапазону "на месте"
+//* Напишите функцию filterRangeInPlace(arr, a, b), которая принимает массив arr и удаляет из него все значения кроме тех,
+//* которые находятся между a и b. То есть, проверка имеет вид a ≤ arr[i] ≤ b.
+
+const arr = [5, 3, 8, 1];
+console.log(arr);
+
+
+function filterRangeInPlace(arr, a, b) {
+	for (let i = 0; i < arr.length; i++) {
+		let val = arr[i];
+
+		if (val < a || val > b) { 		  // удалить, если за пределами интервала
+			arr.splice(i, 1);
+			i--
+		}
+	}
+}
+
+filterRangeInPlace(arr, 1, 4);  // удалены числа вне диапазона 1..4
+console.log(arr); // (2) [3, 1]
