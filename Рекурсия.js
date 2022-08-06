@@ -49,3 +49,39 @@ console.log(pow(2, 3)); // 8
 
 
 
+//todo | Примеры работы рекурсии для сложных структур данных |
+
+const company2 = [ //? "Это на случай простого перебора с помощью reduce без вложенности!"
+	{ name: 'John', salary: 1000, },
+	{ name: 'Alice', salary: 600, },
+	{ name: 'Mary', salary: 1500, },
+	{ name: 'Sveta', salary: 1600, },
+	{ name: 'Egor', salary: 800, },
+];
+
+const company = { //? Тут более сложный объкт с вложенностями!
+	sales: [{ name: 'John', salary: 1000 }, { name: 'Alice', salary: 600 }],
+	development: {
+		sites: [{ name: 'Peter', age: 25, salary: 2000 }, { name: 'Alex', salary: 1800 }],
+		internals: [{ name: 'Jack', salary: 1300 }]
+	}
+};
+//functon просто складывает value ключа salary:
+function sumSlaries(departament) {
+	if (Array.isArray(departament)) { //если является массивом перебераем методом reduce:
+		return departament.reduce((prevValue, curentValue) => prevValue + curentValue.salary, 0);
+	} else {
+		let sum = 0;
+
+		for (let subDep of Object.values(departament)) { // метод Object.values return array
+			sum += sumSlaries(subDep);
+			console.log(sum);
+		}
+		return sum
+	}
+}
+console.log(sumSlaries(company2));
+
+
+
+
